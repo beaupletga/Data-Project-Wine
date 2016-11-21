@@ -92,15 +92,31 @@ dev.off()
 
 #plot(sort(volatile_acid_col),alcohol_col)
 
-#barplot(smp, col="darkgreen")
+
+#summary(smp)
 
 
 
-summary(smp)
+#stacked bar plot
 
+a_matrix=matrix(c(1:33),nrow=11,ncol=3,byrow = TRUE)
+quality_list=c("Mauvaise","Moyenne","Bonne")
+for(i in 1:3)
+{
+  indice_list=which(smp[,12]==quality_list[i])#liste d'indice qui respecte la condition
+  for(j in 2:11)
+  {
+    b=c()
+    for(k in 1:length(indice_list))
+    {
+      b[k]=smp[k,j]
+    }
+    a_matrix[j-1,i]=median(b)#on inverse lignes et colonnes car dans le bar plot les variables sont desormais les lignes et non les colonnes
+  }
+}
 
-
-
+print(a_matrix)
+barplot(a_matrix,names.arg=c("Mauvaise", "Moyenne", "Bonne"),xlab="Qualité",main="Repartition des composants")
 
 
 
