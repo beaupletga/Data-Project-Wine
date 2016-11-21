@@ -52,25 +52,18 @@ kurtosis <-function(colonne)
 #names(summary(quality_col))
 
 
-pdf("Quality.pdf")
 pct <- round(summary(quality_col)/sum(summary(quality_col))*100)
 pie(summary(quality_col),labels=paste(names(summary(quality_col)),pct,"%",sep=" "),main="Quality Repartition")
-dev.off()
 
-
-pdf("Fixed acidity.pdf")
 pct <- round(summary(fixed_acid_col)/sum(summary(fixed_acid_col))*100)
 pie(summary(fixed_acid_col),labels=paste(names(summary(fixed_acid_col)),pct,"%",sep=" "),main="Fixed acidity Repartition")
-dev.off()
 
 
-pdf("Histo Volatile Acidity.pdf")
 hist(volatile_acid_col,xlab="DMC",main="Histo_DMC.pdf")
 boxplot(volatile_acid_col,horizontal=TRUE,col="brown",main="Repartition of Volatile Acidity",outline=FALSE)
 #summary(dmc_col)
 dmc_skewness=skewness(volatile_acid_col)
 dmc_kurtosis=kurtosis(volatile_acid_col)
-dev.off()
 
 
 ###############################################################################
@@ -115,15 +108,15 @@ for(i in 1:3)
   }
 }
 
-
+#Profil lignes
 barplot(prop.table(a_matrix,margin=2),names.arg=c("Mauvaise", "Moyenne", "Bonne"),xlab="Qualité",main="Repartition des composants",width=c(0.1,0.1,0.1),legend = names(smp[,2:11]))
 
-
+#Profil colonnes
 barplot(prop.table(t(a_matrix),margin=2),names.arg=c("vol acid","citric acid","resi sugar","chlorides","fs dioxide","ts dioxide","density","ph","sulphates","alcohol"),xlab="Variables",main="Qualité du vin en fonction des Variables")
 
 
 
-
+res= CA(a_matrix)#On remarque que la quantité totale de sulfure de dioxide est determinante pour la production d'un bon vin.
 
 
 
