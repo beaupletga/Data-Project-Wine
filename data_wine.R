@@ -99,7 +99,7 @@ dev.off()
 
 #stacked bar plot
 
-a_matrix=matrix(c(1:33),nrow=11,ncol=3,byrow = TRUE)
+a_matrix=matrix(c(1:30),nrow=10,ncol=3,byrow = TRUE)
 quality_list=c("Mauvaise","Moyenne","Bonne")
 for(i in 1:3)
 {
@@ -115,8 +115,22 @@ for(i in 1:3)
   }
 }
 
-print(a_matrix)
-barplot(a_matrix,names.arg=c("Mauvaise", "Moyenne", "Bonne"),xlab="Qualité",main="Repartition des composants")
+
+barplot(prop.table(a_matrix,margin=2),names.arg=c("Mauvaise", "Moyenne", "Bonne"),xlab="Qualité",main="Repartition des composants",width=c(0.1,0.1,0.1),legend = names(smp[,2:11]))
+
+
+barplot(prop.table(t(a_matrix),margin=2),names.arg=c("vol acid","citric acid","resi sugar","chlorides","fs dioxide","ts dioxide","density","ph","sulphates","alcohol"),xlab="Variables",main="Qualité du vin en fonction des Variables")
+
+
+
+
+
+
+
+
+
+
+
 
 
 
